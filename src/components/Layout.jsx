@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/AuthContext.jsx'
 
 const links = [
   { to: '/', label: 'Home', end: true },
@@ -12,6 +13,14 @@ const links = [
 ]
 
 function Layout() {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
   return (
     <>
       <nav className="site-nav" aria-label="Primary">
@@ -29,6 +38,23 @@ function Layout() {
               {link.label}
             </NavLink>
           ))}
+          <NavLink to="/dashboard" data-testid="nav-link-dashboard">
+            Dashboard
+          </NavLink>
+          {user ? (
+            <>
+              <span className="badge badge-success" data-testid="nav-user-badge">
+                {user.username}
+              </span>
+              <button type="button" className="btn" onClick={handleLogout} data-testid="nav-logout-button">
+                Log out
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" data-testid="nav-link-login">
+              Log in
+            </NavLink>
+          )}
         </div>
       </nav>
       <main className="app-main">

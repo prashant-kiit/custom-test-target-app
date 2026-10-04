@@ -9,6 +9,7 @@ const sections = [
   { to: '/table', title: 'Table', desc: 'Sorting, filtering, pagination and row selection over mock data.' },
   { to: '/dynamic', title: 'Dynamic Content', desc: 'Loading states, toasts, debounced search, polling, and flaky actions.' },
   { to: '/navigation', title: 'Navigation', desc: 'Tabs, breadcrumbs, nested routes and programmatic navigation.' },
+  { to: '/dashboard', title: 'Auth', desc: 'Login/logout, session persistence and protected-route redirects.' },
 ]
 
 function Home() {
